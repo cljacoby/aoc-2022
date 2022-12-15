@@ -113,16 +113,27 @@ def dir_size(root, cache):
     cache[id(root)] = size
     return size
 
+# ==============================================================================
 
 if __name__ == "__main__":
     root = mk_tree("input.txt")
     print_tree(root)
     cache = dict()
-    dir_size(root, cache)
+    root_size = dir_size(root, cache)
     pprint(f"len(cache)={len(cache)}")
     solution = 0
+
+    # part 1
     for (dirname, size) in cache.items():
         if size < 100000:
             print(f"adding dirname={dirname}, size={size}")
             solution += size
+    print(f"root_size={root_size}") 
     print(f"solution={solution}")
+
+    # part 2
+    mini = 70000000
+    for (dirname, size) in cache.items():
+        if size >= 913445:
+            mini = min(size, mini)
+    print(f"mini={mini}")
